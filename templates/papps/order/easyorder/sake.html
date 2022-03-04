@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	<span id="tm_naiyyou" data-inp="お酒大好きな方に！"></span>
+	<span id="tm_base" data-inp="ホエイ"></span>
+	<span id="tm_seibun" data-inp="ギャバ/コラーゲン"></span>
+	
+	<table><tr><td width="600"></td><td><a href="#"><img src="/static/image/mypage.png" alt=""/></a></td></tr></table>
+	<img src="/static/image/easy/easy1.jpg" width="930" alt=""/>
+	  <br>
+	  <br><br>
+	  
+	  <img src="ai1.gif" width="900" alt=""/><br><br><br>
+	<p name="注文内容" value="お酒大好きな方に！"><font size="+4">ーお酒大好きな方に！ー</font></p><br><br>		
+	<table><tr><td width="330" name="ベース" value="ホエイ">
+		<img src="/static/image/custom/name/perfect.png" width="300" alt="" align="center" valign="middle"/> <br>
+	  </td><td width="500" align="center" valign="middle" name="栄養成分" value="ギャバ/コラーゲン"><font size="+3">二日酔いを吹っ飛ばせ<br>
+
+パーティープロテイン</font></td></tr></table>
+	<br><br><br><br>
+	<p>ー素材ー</p>
+	<br><br>
+	<img src="/static/image/custom/material/whey.png" width="900" height="280" alt=""/><br><br>
+	
+	<br><br>
+	<p>ー配合栄養成分ー</p>
+	<br><br>
+	
+	<img src="/static/image/custom/nutrition/curcuma.png" width="900" height="280" alt=""/><br><br>
+	
+	<img src="/static/image/custom/nutrition/sesamin.png" width="900" height="280" alt=""/><br><br>
+	<img src="/static/image/custom/nutrition/oyster.png" width="900" height="280" alt=""/><br><br>
+	
+	<a id="tm_tran" href="/order/easyorder/easy_order" data-bhref="/order/easyorder/easy_order"><img src="/static/image/ordernext.png" width="162" height="74" alt=""/></a><br>
+	  
+	  <br><br><br><br><br>
+	  
+	  
+	  
+	  
+	  
+	  
+	  <br><br><br>
+	  
+	  
+	  <script type="text/javascript">
+		window.addEventListener('DOMContentLoaded', (e) => {
+			let naiyou = document.getElementById("tm_naiyyou").dataset.inp;
+			let base = document.getElementById("tm_base").dataset.inp;
+			let seibun = document.getElementById("tm_seibun").dataset.inp;
+			let tran = document.getElementById("tm_tran");
+			let base_url = tran.dataset.bhref;
+			let tran_url = `${base_url}?naiyou=${naiyou}&&base=${base}&&seibun=${seibun}`;
+			tran.setAttribute("href", tran_url);
+		});
+		</script>
+	  {% include 'papps/footer.html' %}
+	  {% endblock %}
+	  
+	  
+	  

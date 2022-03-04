@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div id="container">
+<div align="center">
+
+	
+    <br><br>
+	<img src="static/image/ordercheck/order2.png" width="900" alt=""/>
+	<br><br>
+	
+		
+	<br><br>
+	<div style="max-width: 1240px;text-align:left;">
+<form action="" method="POST">
+{% csrf_token %}
+
+	<div>
+		<font size="+1">お名前</font><br>
+		<div style="display: inline-block; width: 49%; margin-right:1%;">
+		{{ form.sei_name.erros }}{{ form.sei_name }}
+		</div>
+		<div style="display: inline-block; width: 49%">
+		{{ form.mei_name.erros }}{{ form.mei_name }}
+		</div>
+	</div>
+	<div>
+	<font size="+1">住所</font><br>
+		{{ form.yubin_bangou.errors }}{{ form.yubin_bangou }}<br>
+		{{ form.jusyo.errors }}{{ form.jusyo }}
+	</div>
+	<div>
+		<font size="+1">電話番号（ハイフンなし）</font><br>
+		{{ form.tel_bangou.errors }}{{ form.tel_bangou }}
+	</div>
+
+	<div>
+	{% for error in form.non_field_errors %}
+	<p>{{ error }}</p>
+	{% endfor %}
+	</div>
+	<div>
+		<font size="+1">メールアドレス<br>●会員ページのIDになります</font><br>
+		{{ form.email.errors }}{{ form.email }}
+	</div>
+	<div>
+		<font size="+1">メールアドレス（確認用）</font><br>
+		{{ form.email_conf.errors }}{{ form.email_conf }}
+	</div>
+	<div>
+		<font size="+1">パスワード<br>●会員ページのパスワードになります</font><br>
+		{{ form.password.errors }}{{ form.password }}
+	</div>
+	<div>
+		<font size="+1">パスワード（確認用）</font><br>
+		{{ form.password_conf.errors }}{{ form.password_conf }}
+	</div>
+	<Div style="text-align:center;margin-top: 2em;">
+		<button><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></button>
+	</Div>
+	</form>
+</div>
+	<br><br><br>
+	{% include 'papps/footer.html' %}
+	{% endblock %}

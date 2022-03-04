@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	
+    <br><br>
+	{% include 'papps/auth.html' %}	<br>
+
+	<h2>一般ユーザ一覧</h2>
+	{% if users_cnt != 0 %}
+		<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
+			{% for q in users %}
+				<tr>
+					<td style="width:250px;background-color:#dcdcdc;">{{ q.email }}</td>
+					<td style="width:500px">{{ q.id }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+	
+{% include 'papps/footer.html' %}
+{% endblock %}

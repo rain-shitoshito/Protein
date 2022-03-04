@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	{% include 'papps/auth.html' %}
+	<img src="/static/image/top1.png" width="930" alt=""/>
+	<br>
+    <br><br>
+	<img src="/static/image/ai/ai1.png" width="900" alt=""/>
+	<br><br><br>
+	
+	<p><font size="+3">あなたの性別は何ですか。</font></p>
+	
+	
+	<br><br>
+	<table><tr>
+		<td><a href="/ai/aim1"><img src="/static/image/ai/ai_1_1.png" width="250" alt=""/></a></td>
+		<td width="30"></td>
+		<td><a href="/ai/aiw1"><img src="/static/image/ai/ai_1_2.png" width="250" alt=""/></a></td>
+		<td width="30"></td>
+		<td><a href="/ai/aiw1"><img src="/static/image/ai/ai_1_3.png" width="250" alt=""/></a></td>
+		
+		</tr></table>
+	
+<br><br><br><br><br>
+
+	
+
+	
+	
+	
+	<br><br><br>
+	
+	{% include 'papps/footer.html' %}
+	{% endblock %}
+	

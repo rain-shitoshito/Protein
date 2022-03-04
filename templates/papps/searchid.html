@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+    <div style="max-width:1240px">
+    <br><br>
+    <h2 style="text-align:center">ユーザID検索</h2>
+	
+	<br><br>
+	
+	<form action="{% url 'papps:basesearchid' %}" method="POST">
+		{% csrf_token %}
+		{{ form.as_table }}
+		<div style="text-align:center;margin-top: 2em;">
+			<button><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></button>
+		</div>
+	</form>
+	<br><br>
+    <h3>結果</h3>
+    <p>{{ user_id }}</p>
+    <br><br>
+    
+    
+    
+    <br><br><br>
+    
+{% include 'papps/footer.html' %}
+{% endblock %}

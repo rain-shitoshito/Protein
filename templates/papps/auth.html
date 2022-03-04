@@ -1,0 +1,17 @@
+{% block content %}
+{% load static %}
+<table><tr><td width="600"></td><td>
+    {% if user.is_authenticated %}
+        <div style="display:flex">
+            {% if user.is_superuser %}
+                <a href="{% url 'papps:basesuperuserpage' %}" style="font-size:1.5em">{{ user.sei_name }} {{ user.mei_name }}様</a>
+            {% else %}
+                <a href="{% url 'papps:basemypage' pk=user.pk %}" style="font-size:1.5em">{{ user.sei_name }} {{ user.mei_name }}様</a>
+            {% endif %}
+            <a href="{% url 'papps:baselogout' %}" style="margin-left:1em;font-size:1.5em">ログアウト</a>
+        </div>
+        {% else %}
+        <a href="{% url 'papps:baselogin' %}"><img src="/static/image/mypage.png" alt=""/></a>
+    {% endif %}
+</td></tr></table>
+{% endblock %}

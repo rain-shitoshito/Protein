@@ -1,0 +1,29 @@
+       {% extends "base.html" %}
+       {% block content %}
+       {% load static %}
+       <div id="container">
+       <div align="center">
+       
+           <div style="max-width:1240px">
+           <br><br>
+           <h2 style="text-align:center">管理ページ</h2>
+        <ul>
+            <li><a href="{% url 'papps:baseinputaddcreate' %}">項目追加</a></li>
+            <li><a href="{% url 'papps:basesearchid' %}">メールアドレスからユーザID検索</a></li>
+            <li><a href="{% url 'papps:basenormaluserinfo' %}">一般ユーザ一覧</a></li>
+        </ul>
+           <br><br>
+       
+           </div>
+           
+           
+           
+           
+           <br><br>
+           
+           
+           
+           <br><br><br>
+           
+       {% include 'papps/footer.html' %}
+       {% endblock %}

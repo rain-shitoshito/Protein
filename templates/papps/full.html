@@ -1,0 +1,414 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	<span id="tm_naiyou" data-inp="フルオーダー"></span>
+	<span id="tm_base" data-inp=""></span>
+	<span id="tm_seibun" data-inp="ビタミンB/ビタミンC/コラーゲン/ヒアルロン酸/酵素/コエンザイム/カルシウム/イチョウ葉/ダイエットプラス/ロイヤルゼリー"></span>
+	<span id="tm_flavor" data-inp=""></span>
+  <span id="tm_other" data-inp="ドライフルーツ/個包装"></span>
+
+  {% include 'papps/auth.html' %}
+	<img src="/static/image/full/full1.jpg" width="930" name="注文内容" value="フルオーダー" alt=""/>
+	<br>
+    <br><br>
+	<img src="/static/image/full/full2.jpg" width="900" alt=""/>
+	<br><br>
+
+		<script language="JavaScript">
+<!--
+var class_na = "hoge";
+var img1 = new Array("static/image/full/full1_1_1.png","static/image/full/full1_2_1.png","static/image/full/full1_3_1.png");
+var img2 = new Array("static/image/full/full1_1.png","static/image/full/full1_2.png","static/image/full/full1_3.png");
+var flag= new Array(0,0,0);
+
+var targets= new Array();
+function change(obj){
+var hoge_range = document.getElementById('base');
+var targets = hoge_range.getElementsByTagName('img');
+for(var i=0;i<targets.length;i++){
+if(targets[i]==obj && flag[i]==0){
+targets[i].src=img2[i];
+flag[i]=1;
+// 選択データ挿入
+document.getElementById("tm_base").dataset.inp = targets[i].getAttribute("value");
+} else {
+if (flag[i]==1) {
+targets[i].src=img1[i];
+flag[i]=0;
+}
+}
+}
+}
+// -->
+</script>
+		
+		<div id="base">
+<img width="200" src="/static/image/full/full1_1_1.png" class="hoge" onClick="change(this)" name="ベース" value="ホエイ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="200" src="/static/image/full/full1_2_1.png" class="hoge" onClick="change(this)" name="ベース" value="大豆">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="200" src="/static/image/full/full1_3_1.png" class="hoge" onClick="change(this)" name="ベース" value="えんどう豆">
+</div>
+		
+
+	<br><br>
+	<a href="/detail"><img src="/static/image/full/detail.png" width="300" alt=""/></a><br><br><br><br><br>
+
+	
+	
+	<img src="/static/image/full/full3.jpg" width="900" alt="フレーバー選択"/>
+	<br><br>
+	<br>
+	<p><font size="+2" face="cursive">CAFE&nbsp;FLAVOR</font></p>
+	<br>
+	<script language="JavaScript">
+<!--
+var class_name = "hogea";
+var img3 = new Array("static/image/full/full2_1_1.png","static/image/full/full2_1_2.png","static/image/full/full2_1_3.png","static/image/full/full2_1_4.png","static/image/full/full2_2_1.png","static/image/full/full2_2_2.png","static/image/full/full2_2_3.png","static/image/full/full2_2_4.png","static/image/full/full2_4_1.png","static/image/full/full2_4_2.png","static/image/full/full2_4_3.png","static/image/full/full2_4_4.png","static/image/full/full2_5_1.png","static/image/full/full2_5_2.png","static/image/full/full2_5_3.png","static/image/full/full2_5_4.png","static/image/full/full2_6_1.png","static/image/full/full2_6_2.png","static/image/full/full2_6_3.png","static/image/full/full2_6_4.png","static/image/full/full2_7_1.png","static/image/full/full2_7_2.png","static/image/full/full2_7_3.png","static/image/full/full2_7_4.png");
+var img4 = new Array("static/image/full/full2_1_1_1.png","static/image/full/full2_1_2_1.png","static/image/full/full2_1_3_1.png","static/image/full/full2_1_4_1.png","static/image/full/full2_2_1_1.png","static/image/full/full2_2_2_1.png","static/image/full/full2_2_3_1.png","static/image/full/full2_2_4_1.png","static/image/full/full2_4_1_1.png","static/image/full/full2_4_2_1.png","static/image/full/full2_4_3_1.png","static/image/full/full2_4_4_1.png","static/image/full/full2_5_1_1.png","static/image/full/full2_5_2_1.png","static/image/full/full2_5_3_1.png","static/image/full/full2_5_4_1.png","static/image/full/full2_6_1_1.png","static/image/full/full2_6_2_1.png","static/image/full/full2_6_3_1.png","static/image/full/full2_6_4_1.png","static/image/full/full2_7_1_1.png","static/image/full/full2_7_2_1.png","static/image/full/full2_7_3_1.png","static/image/full/full2_7_4_1.png");
+var flaga= new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
+var targetsa= new Array();
+function changea(obj){
+var hoge_rangea = document.getElementById('flavor');
+var targetsa = hoge_rangea.getElementsByTagName('img');
+for(var ia=0;ia<targetsa.length;ia++){
+if(targetsa[ia]==obj && flaga[ia]==0){
+targetsa[ia].src=img4[ia];
+flaga[ia]=1;
+// 選択データ挿入
+document.getElementById("tm_flavor").dataset.inp = targetsa[ia].getAttribute("value");
+} else {
+if (flaga[ia]==1) {
+targetsa[ia].src=img3[ia];
+flaga[ia]=0;
+}
+}
+}
+}
+// -->
+</script>
+		
+	<div id="flavor">
+<img width="150" src="/static/image/full/full2_1_1.png" class="hogea" onClick="changea(this)" name="フレーバー" value="コーヒー">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_1_2.png" class="hogea" onClick="changea(this)" name="フレーバー" value="ココア">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_1_3.png" class="hogea" onClick="changea(this)" name="フレーバー" value="チョコ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_1_4.png" class="hogea" onClick="changea(this)" name="フレーバー" value="ミルクティー"><br><br>
+<img width="150" src="/static/image/full/full2_2_1.png" class="hogea" onClick="changea(this)" name="フレーバー" value="バニラ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_2_2.png" class="hogea" onClick="changea(this)" name="フレーバー" value="抹茶">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_2_3.png" class="hogea" onClick="changea(this)" name="フレーバー" value="ココナッツ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_2_4.png" class="hogea" onClick="changea(this)" name="フレーバー" value="あずき"><br><br><br>
+		<p><font size="+2" face="cursive">FRUITY&nbsp;FLAVOR</font></p><br>
+		
+		
+	  <img width="150" src="/static/image/full/full2_4_1.png" class="hogea" onClick="changea(this)" name="フレーバー" value="ブルーベリー">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_4_2.png" class="hogea" onClick="changea(this)" name="フレーバー" value="グレープ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_4_3.png" class="hogea" onClick="changea(this)" name="フレーバー" value="アサイー">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_4_4.png" class="hogea" onClick="changea(this)" name="フレーバー" value="イチゴ"><br><br>
+<img width="150" src="/static/image/full/full2_5_1.png" class="hogea" onClick="changea(this)" name="フレーバー" value="りんご">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_5_2.png" class="hogea" onClick="changea(this)" name="フレーバー" value="スイカ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_5_3.png" class="hogea" onClick="changea(this)" name="フレーバー" value="ピーチ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_5_4.png" class="hogea" onClick="changea(this)" name="フレーバー" value="ローズ"><br><br>
+<img width="150" src="/static/image/full/full2_6_1.png" class="hogea" onClick="changea(this)" name="フレーバー" value="バナナ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_6_2.png" class="hogea" onClick="changea(this)" name="フレーバー" value="マンゴー">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_6_3.png" class="hogea" onClick="changea(this)" name="フレーバー" value="パイン">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_6_4.png" class="hogea" onClick="changea(this)" name="フレーバー" value="パッションフルーツ"><br><br>
+<img width="150" src="/static/image/full/full2_7_1.png" class="hogea" onClick="changea(this)" name="フレーバー" value="レモン">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_7_2.png" class="hogea" onClick="changea(this)" name="フレーバー" value="オレンジ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_7_3.png" class="hogea" onClick="changea(this)" name="フレーバー" value="パパイヤ">&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="150" src="/static/image/full/full2_7_4.png" class="hogea" onClick="changea(this)" name="フレーバー" value="メロン"><br><br>
+		
+		 </div>
+	
+	
+	
+	
+<img src="/static/image/full/full4.jpg" width="900" alt=""/>
+
+	
+	
+	<br><br>
+
+	
+	<table id="seibun" align="center">
+<tr>
+        <td width="300">
+    <img id="image_file" src="/static/image/full/full3_1_1.png" width="200" alt="追加しない" name="栄養成分" value="追加しない">
+	  </td>
+	
+	
+	<td width="300">
+    <img id="image_filea" src="/static/image/full/full3_1_2.png" width="200" alt="ビタミンB" name="栄養成分" value="ビタミンB">
+	</td>
+	
+	
+	<td width="300">
+    <img id="image_fileb" src="/static/image/full/full3_1_3.png" width="200" alt="ビタミンC" name="栄養成分" value="ビタミンC">
+	</td>
+	  </tr>
+		<tr>
+			
+	               <td width="300">
+    <img id="image_filec" src="/static/image/full/full3_2_1.png"  width="200" alt="コラーゲン" name="栄養成分" value="コラーゲン">
+	</td>
+	
+	
+	<td width="300">
+    <img id="image_filed" src="/static/image/full/full3_2_2.png" width="200" alt="ヒアルロン酸" name="栄養成分" value="ヒアルロン酸">
+	</td>
+	
+	
+	<td width="300">
+    <img id="image_filee" src="/static/image/full/full3_2_3.png" width="200" alt="酵素" name="栄養成分" value="酵素">
+	</td>
+	
+</tr>
+			<tr>
+	               <td width="300">
+    <img id="image_filef" src="/static/image/full/full3_3_1.png" width="200" alt="コエンザイム" name="栄養成分" value="コエンザイム">
+	</td>
+	
+	
+	<td width="300">
+    <img id="image_fileg" src="/static/image/full/full3_3_2.png" width="200" alt="カルシウム" name="栄養成分" value="カルシウム">
+	</td>
+	
+	
+	<td width="300">
+    <img id="image_fileh" src="/static/image/full/full3_3_3.png" width="200" alt="イチョウ葉" name="栄養成分" value="イチョウ葉">
+	</td>
+	
+</tr>	
+		<tr>
+	<td colspan="3" width="300">
+    <img id="image_filej" src="/static/image/full/full3_4.png" height="80" alt="ダイエットプラス" name="栄養成分" value="ダイエットプラス">
+	</td>
+	
+</tr>	
+		
+				<tr>
+	<td colspan="3" width="300">
+    <img id="image_filek" src="/static/image/full/full3_5.png" height="80" alt="ロイヤルゼリー" name="栄養成分" value="ロイヤルゼリー">
+	</td>
+	
+</tr>	
+	</table>
+	
+	
+	<br><br>
+	
+	<a href="/detail"><img src="/static/image/full/detail.png" width="300" alt=""/></a><br><br><br><br><br>
+	<br><br>
+	<img src="/static/image/full/full5.jpg" width="900" alt=""/>
+	
+	<br><br>
+
+	<table id="other">
+    <tr>
+	  <td width="300">
+    <img src="/static/image/full/full3_1_1.png"  height="80" alt="追加しない" name="オプション" value="追加しない">
+	  </td>
+	
+	
+	<td width="300">
+    <img src="/static/image/full/full4_1_2.png"  height="80" alt="ドライフルーツ" name="オプション" value="ドライフルーツ">
+	</td>
+	
+	
+	<td width="300">
+    <img src="/static/image/full/full4_1_3.png" height="80" alt="個包装"  name="オプション" value="個包装">
+	</td>
+</tr></table>
+	
+	
+	
+	
+	<br><br>
+	
+	<table id="order">
+    <tr>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">
+	    <a id="tm_tran" href="/order" data-bhref="/order"><img src="/static/image/ordernext.png" width="200" alt=""/></a></td>
+		</tr></table>
+	
+	
+	<br><br><br>
+	<script type="text/javascript">
+    // フレーバー未選択時のリンク移動を防ぐためリンクを非活性
+    window.addEventListener('DOMContentLoaded', (e) => {
+
+        // 選択されてない場合のリンク移動を防ぐ
+        let tran = document.getElementById("tm_tran");
+        tran.classList.add("link_negative");
+        
+        // 栄養成分
+        const eiyou_seibun = [
+          ["/static/image/full/full3_1_1.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_1_2.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_1_3.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_2_1.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_2_2.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_2_3.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_3_1.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_3_2.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_3_3.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_4.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full3_5.png","/static/image/full/full3_1_1_1.png"],
+        ];
+        // その他
+        const other = [
+          ["/static/image/full/full3_1_1.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full4_1_2.png","/static/image/full/full3_1_1_1.png"],
+          ["/static/image/full/full4_1_3.png","/static/image/full/full3_1_1_1.png"],
+        ];
+
+        // 成分のデータ
+        //'追加しない' 'ビタミンB', 'ビタミンC', 'コラーゲン', 'ヒアルロン酸', '酵素', 'イチョウ葉', 'カルシウム', 'コエンザイム', 'ダイエットプラス', 'ロイヤルゼリー'
+        let seibun_flag = [
+          true, true, true, true, true, 
+          true, true, true, true, true, true, 
+        ];
+        // その他のデータ
+        let other_flag = [
+          true, true, true,
+        ];
+
+        const seibun_elem = document.querySelectorAll("#seibun img");
+        const other_elem = document.querySelectorAll("#other img");
+        
+
+        // 画像切り替え
+        const change_index_img = function(data) {
+          let img_data = data[0];
+          let i = data[1];
+          let now_src = this.getAttribute("src");
+          if(this.getAttribute("src") == img_data[i][0]) {
+            this.setAttribute("src", img_data[i][1]);
+          } else {
+            this.setAttribute("src", img_data[i][0]);
+          }
+        };
+
+        // 追加する栄養成分のフラグ
+        const _get_index_flags = function(elem, img_data, flags) {
+          for(let i=0; i<flags.length; i++) {
+            // データが選択されていない場合
+            if(elem[i].getAttribute("src") == img_data[i][0]) {
+              flags[i] = true;
+            } else {
+              flags[i] = false;
+            }
+          }
+          return flags;
+        };
+        
+        // 栄養成分のデータ導出
+        const get_seibun_data = function() {
+          let flags = _get_index_flags(seibun_elem, eiyou_seibun, seibun_flag);
+          let val = "";
+          for(let i=0; i<flags.length; i++) {
+            // 「追加しない」が選択されていた場合
+            if(i == 0) {
+              if(!flags[i]) {
+                return "追加しない";
+              }
+            } else {
+              if(flags[i]) {
+                val += seibun_elem[i].getAttribute("value") + "/";
+              }
+            }
+          }
+          // 末尾の「/」を削除
+          return val.slice(0, -1);
+        };
+
+        
+        // その他のデータ導出
+        const get_other_data = function() {
+          let flags = _get_index_flags(other_elem, other, other_flag);
+          let val = "";
+          for(let i=0; i<flags.length; i++) {
+            // 「追加しない」が選択されていた場合
+            if(i == 0) {
+              if(!flags[i]) {
+                return "追加しない";
+              }
+            } else {
+              if(flags[i]) {
+                val += other_elem[i].getAttribute("value") + "/";
+              }
+            }
+          }
+          // 末尾の「/」を削除
+          return val.slice(0, -1);
+        };
+
+        // 栄養成分のデータ格納
+        for(let i=0; i<seibun_elem.length; i++) {
+          if(i == 0) {
+            seibun_elem[0].addEventListener("click", function() {
+                // 関数内のthisは要素
+                change_index_img.call(this, [eiyou_seibun, 0]);
+                for(let j=1; j<seibun_elem.length; j++) {
+                  seibun_elem[j].setAttribute("src", eiyou_seibun[j][0]);
+                }
+                document.getElementById("tm_seibun").dataset.inp = get_seibun_data();
+            });
+          } else {
+            seibun_elem[i].addEventListener("click", function() {
+                // 関数内のthisは要素
+                change_index_img.call(this, [eiyou_seibun, i]);
+                seibun_elem[0].setAttribute("src", eiyou_seibun[0][0]);
+                document.getElementById("tm_seibun").dataset.inp = get_seibun_data();
+            });
+          }
+        }
+
+        // その他のデータ格納
+        for(let i=0; i<other_elem.length; i++) {
+          if(i == 0) {
+            other_elem[0].addEventListener("click", function() {
+                // 関数内のthisは要素
+                change_index_img.call(this, [other, 0]);
+                for(let j=1; j<other_elem.length; j++) {
+                  console.log(j);
+                  other_elem[j].setAttribute("src", other[j][0]);
+                }
+                document.getElementById("tm_other").dataset.inp = get_other_data();
+            });
+          } else {
+            other_elem[i].addEventListener("click", function() {
+                // 関数内のthisは要素
+                change_index_img.call(this, [other, i]);
+                other_elem[0].setAttribute("src", other[0][0]);
+                document.getElementById("tm_other").dataset.inp = get_other_data();
+            });
+          }
+        }
+    });
+    // 注文リンク設定
+    document.body.addEventListener("click", function(){
+      let tran = document.getElementById("tm_tran");
+      let naiyou = document.getElementById("tm_naiyou").dataset.inp;
+      let base = document.getElementById("tm_base").dataset.inp;
+      let seibun = document.getElementById("tm_seibun").dataset.inp;
+      let flavor = document.getElementById("tm_flavor").dataset.inp;
+      let other = document.getElementById("tm_other").dataset.inp;
+
+      if(naiyou != "" && base != "" && seibun != "" && flavor != "" && other != "") {
+        tran.classList.remove("link_negative");
+        let base_url = tran.dataset.bhref;
+        let tran_url = `${base_url}?naiyou=${naiyou}&&base=${base}&&seibun=${seibun}&&flavor=${flavor}&&other=${other}`;
+        tran.setAttribute("href", tran_url);
+      }
+    });
+
+      
+  </script>
+  {% include 'papps/footer.html' %}
+  {% endblock %}

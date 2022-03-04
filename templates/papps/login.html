@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div id="container">
+<div align="center">
+    <h2 style="text-align:center;">ログイン</h2>
+<div style="max-width:1240px">
+<form action="" method="POST">
+{% csrf_token %}
+{{ form.non_field_errors }}
+	<div>
+		<font size="+1">メールアドレス</font><br>
+		{{ form.username }}
+	</div>
+	<div>
+		<font size="+1">パスワード</font><br>
+		{{ form.password }}
+	</div>
+	<div style="text-align:center;margin-top: 2em;">
+		<button><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></button>
+	</div>
+	</form>
+</div>
+	<br><br><br>
+	{% include 'papps/footer.html' %}
+	{% endblock %}

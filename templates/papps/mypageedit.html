@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	<div style="max-width:1240px">
+    <br><br>
+	{% include 'papps/auth.html' %}
+	<br>
+	<table><tr><td width="650" align="left"><font size="+3">{{ user_name }}様</font></td></tr></table>
+	
+	<img src="/static/image/mypage/mypage2.png" width="700" alt=""/><br>
+	
+	<br><br>
+	
+	<form action="{% url 'papps:basemypageedituser' pk=view.kwargs.pk %}" method="POST">
+		{% csrf_token %}
+		{{ useredit_form.as_table }}
+		<div style="text-align:center;margin-top: 2em;">
+			<button><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></button>
+		</div>
+	</form>
+	<form action="{% url 'papps:basemypageeditorder' pk=view.kwargs.pk %}" method="POST">
+		{% csrf_token %}
+		{{ orderedit_form.as_table }}
+		<div style="text-align:center;margin-top: 2em;">
+			<button><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></button>
+		</div>
+	</form>
+	{% if inputadd_cnt != 0 %}
+		<form action="{% url 'papps:basemypageeditinputadddata' pk=view.kwargs.pk %}" method="POST">
+			{% csrf_token %}
+			{{ inputadddata_form.as_table }}
+			<div style="text-align:center;margin-top: 2em;">
+				<button><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></button>
+			</div>
+		</form>
+	{% endif %}
+	<br><br>
+
+	</div>
+	
+	
+	
+	
+	<br><br>
+	
+	
+	
+	<br><br><br>
+	
+{% include 'papps/footer.html' %}
+{% endblock %}

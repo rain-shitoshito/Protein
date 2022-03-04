@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+	<span id="tm_naiyou" data-inp="{{ naiyou }}"></span>
+	<span id="tm_base" data-inp="{{ base }}"></span>
+	<span id="tm_seibun" data-inp="{{ seibun }}"></span>
+	<span id="tm_flavor" data-inp="{{ flavor }}"></span>
+	<span id="tm_other" data-inp="{{ other }}"></span>
+	<span id="tm_syoukei" data-inp="{{ syoukei }}円"></span>
+	<span id="tm_zei" data-inp="{{ zei }}円"></span>
+	<span id="tm_zeikomi" data-inp="{{ zeikomi }}円"></span>
+	<span id="tm_send_price" data-inp="{{ send_price }}円"></span>
+	<span id="tm_sougaku" data-inp="{{ sougaku }}円"></span>
+
+    <br><br>
+	<img src="/static/image/ordercheck/order1.png" width="900" alt=""/>
+	<br><br>
+	
+		
+	
+	
+	<br><br>
+
+	<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
+	<tr><td bgcolor="#dcdcdc" height="30" width="250">
+		&nbsp;&nbsp;&nbsp;注文内容
+		</td>
+		
+	<td width="400">
+		{{ naiyou }}
+		</td></tr>
+		
+		<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;プロテインベース
+		</td>
+		
+	<td>{{ base }}</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;フレーバー
+		</td>
+	<td>{{ flavor }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;栄養成分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</td>
+	<td>{{ seibun }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;【オプション】その他
+		</td>
+	<td>{{ other }}
+		</td></tr>
+	
+		<tr><td align="right" height="30">
+		小計&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right">{{ syoukei }}円
+		</td></tr>
+	<tr><td align="right" height="30">
+		消費税&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right">{{ zei }}円
+		</td></tr>
+			<tr><td align="right" height="30">
+		税込&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right" height="30">{{ zeikomi }}円
+		</td></tr>
+			<tr><td align="right" height="30">
+		送料&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right" height="30">{{ send_price }}円
+		</td></tr>
+			<tr><td align="right" height="30">
+		お支払い総額&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right" height="30">{{ sougaku }}円
+		</td></tr>
+
+		
+		
+		
+	</table>
+	
+	
+	
+	
+	
+	
+	<br><br>
+	
+	<table><tr>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">
+	    <a id="tm_tran" href="/order2" data-bhref="/order2"><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></a></td>
+
+		</tr></table>
+	
+	
+	<br><br><br>
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded', (e) => {
+			let naiyou = document.getElementById("tm_naiyou").dataset.inp;
+			let base = document.getElementById("tm_base").dataset.inp;
+			let seibun = document.getElementById("tm_seibun").dataset.inp;
+			let flavor = document.getElementById("tm_flavor").dataset.inp;
+			let other = document.getElementById("tm_other").dataset.inp;
+			let syoukei = document.getElementById("tm_syoukei").dataset.inp;
+			let zei = document.getElementById("tm_zei").dataset.inp;
+			let zeikomi = document.getElementById("tm_zeikomi").dataset.inp;
+			let send_price = document.getElementById("tm_send_price").dataset.inp;
+			let sougaku = document.getElementById("tm_sougaku").dataset.inp;
+
+			let tran = document.getElementById("tm_tran");
+			let base_url = tran.dataset.bhref;
+			let tran_url = `${base_url}?naiyou=${naiyou}&&base=${base}&&seibun=${seibun}&&flavor=${flavor}&&other=${other}&&syoukei=${syoukei}&&zei=${zei}&&zeikomi=${zeikomi}&&send_price=${send_price}&&sougaku=${sougaku}`;
+			tran.setAttribute("href", tran_url);
+			
+		});
+	</script>
+	{% include 'papps/footer.html' %}
+	{% endblock %}

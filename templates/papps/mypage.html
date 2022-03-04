@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	
+    <br><br>
+	{% include 'papps/auth.html' %}	<br>
+	<table><tr><td width="650" align="left"><font size="+3">{{ name }}様</font></td></tr></table>
+	
+	<img src="/static/image/mypage/mypage2.png" width="700" alt=""/><br>
+	
+	<br><br>
+	
+		
+	
+	
+	<br><br>
+
+	<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
+	<tr><td bgcolor="#dcdcdc" height="30" width="250">
+		&nbsp;&nbsp;&nbsp;郵便番号
+		</td>
+	<td width="500">{{ yubin_bangou }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;住所&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</td>
+	<td>{{ jusyo }}
+		</td></tr>
+	<tr>
+	<td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;電話番号</td>
+	<td>{{ tel_bangou }}
+		</td></tr>
+	
+		<tr><td bgcolor="#dcdcdc" align="left" height="30">
+		&nbsp;&nbsp;&nbsp;メールアドレス&nbsp;&nbsp;&nbsp;
+		</td>
+	<td>{{ email }}
+		</td></tr>
+		<tr><td bgcolor="#dcdcdc" align="left" height="30">
+		&nbsp;&nbsp;&nbsp;パスワード&nbsp;&nbsp;&nbsp;
+		</td>
+	<td><a href="{% url 'papps:basepasswordchange' %}">変更はコチラから</a>
+		</td></tr>
+		<tr><td bgcolor="#dcdcdc" align="left" height="30">
+		&nbsp;&nbsp;&nbsp;お支払い方法&nbsp;&nbsp;&nbsp;
+		</td>
+	<td><a href="">変更はコチラから</a>
+		</td></tr>
+
+		
+	</table>
+	<br><br><br>
+		<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
+	<tr><td bgcolor="#dcdcdc" height="30" width="250">
+		&nbsp;&nbsp;&nbsp;注文内容
+		</td>
+	<td width="500">
+		{{ naiyou }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;プロテインベース
+		</td>
+	<td>{{ base }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;フレーバー
+		</td>
+	<td>{{ flavor }}
+		</td></tr>
+	<tr>
+	<td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;栄養成分</td>
+	<td>{{ seibun }}
+		</td></tr>
+
+			<tr>
+	<td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;オプション</td>
+	<td>{{ other }}
+		</td></tr>
+
+			
+	</table>
+	<br><br><br>
+	<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
+		{% for key, value in iad_data.items %}
+		<tr>
+			<td style="width:250px;background-color:#dcdcdc;">{{ key }}</td>
+			<td style="width:500px">{{ value }}</td>
+		  </tr>
+		{% endfor %}
+	</table>
+	
+	
+	<br><br>
+	
+	{% if user.is_superuser %}
+		<div style="text-align:center;margin-top: 2em;">
+			<a href="{% url 'papps:basemypageedit' pk=view.kwargs.pk %}"><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></a>
+		</div>
+	{% endif %}
+
+	<br><br><br>
+	
+{% include 'papps/footer.html' %}
+{% endblock %}

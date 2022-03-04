@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	{% include 'papps/auth.html' %}
+	<img src="/static/image/top1.png" width="930" alt=""/>
+	<br>
+    <br><br>
+	<img src="/static/image/ai/ai1.png" width="900" alt=""/>
+	<br><br><br>
+	
+	<p><font size="+3">スマホやパソコンをどれくらい見ますか。</font></p>
+	
+	
+	<br><br>
+	<table><tr>
+		<td><a href="/ai/aianser/eye"><img src="/static/sub_image/ai/2/6.png" width="250" alt=""/></a></td>
+		<td width="30"></td>
+		<td><a href="/ai/2/ai5"><img src="/static/sub_image/ai/2/5.png" width="250" alt=""/></a></td>
+				</tr></table>
+	
+<br><br><br><br><br>
+
+	
+
+	
+	
+	
+	<br><br><br>
+	
+	{% include 'papps/footer.html' %}
+	{% endblock %}

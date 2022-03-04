@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+	
+    <br><br>
+	<img src="/image/ordercheck/order3.png" width="900" alt=""/>
+	<br><br>
+	
+		
+	
+	
+	<br><br>
+
+	<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
+	<tr><td bgcolor="#dcdcdc" height="30" width="250">
+		&nbsp;&nbsp;&nbsp;お名前
+		</td>
+	<td width="500">
+		{{ name }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;郵便番号
+		</td>
+	<td>{{ yubin_bangou }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;住所&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</td>
+	<td>{{ jusyo }}
+		</td></tr>
+	<tr>
+	<td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;電話番号</td>
+	<td>{{ tel_bangou }}
+		</td></tr>
+	
+		<tr><td bgcolor="#dcdcdc" align="left" height="30">
+		&nbsp;&nbsp;&nbsp;メールアドレス&nbsp;&nbsp;&nbsp;
+		</td>
+	<td>{{ email }}
+		</td></tr>
+		<tr><td bgcolor="#dcdcdc" align="left" height="30">
+		&nbsp;&nbsp;&nbsp;パスワード&nbsp;&nbsp;&nbsp;
+		</td>
+	<td>※保護のために、表示しません。
+		</td></tr>
+		
+	</table>
+	
+	
+	
+	
+	
+	
+	<br><br>
+	
+	<table><tr>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">
+		<form id="insertdata" action="/insertdata" method="post">
+			{% csrf_token %}
+			<div id="data_submit" style="display:inline-block;"><img src="/static/image/ordercheck/order3_1.png" width="200" alt=""/></div></td>
+		</form>
+		</tr></table>
+	
+	
+	<br><br><br>
+	
+	<script type="text/javascript">
+		window.addEventListener('DOMContentLoaded', (e) => {
+			document.getElementById("data_submit").addEventListener('click', function() {
+				document.getElementById("insertdata").submit();
+			});
+		});
+	</script>
+
+	{% include 'papps/footer.html' %}
+	{% endblock %}

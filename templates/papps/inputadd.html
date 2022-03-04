@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div id="container">
+<div align="center">
+    <h2 style="text-align:center;">項目名登録</h2>
+<div style="max-width:1240px">
+<form action="" method="POST">
+{% csrf_token %}
+{{ form.as_table }}
+	<div style="text-align:center;margin-top: 2em;">
+		<button><img src="/static/image/ordercheck/ordernext.png" width="200" alt=""/></button>
+	</div>
+	</form>
+</div>
+	<br><br><br>
+    <div>
+        <h3>登録タグ（※クリックすると項目が削除されるので注意してください）</h3>
+        {% for inpdata in inputadddata %}
+            <a href="{% url 'papps:baseinputadddelete' pk=inpdata.pk %}" class="tag" data-pk="{{ inpdata.pk }}">×{{ inpdata.name }}</a>
+        {% endfor %}
+    </div>
+	{% include 'papps/footer.html' %}
+	{% endblock %}
