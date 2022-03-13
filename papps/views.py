@@ -10,6 +10,7 @@ from django.contrib.auth.views import (
     LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView,
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 )
+from django.core.signing import BadSignature, SignatureExpired, loads, dumps
 from django.http import Http404
 from .forms import *
 from .models import *
@@ -83,11 +84,11 @@ class BaseOrder(generic.TemplateView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.prices = {
-            'base': 3132,
+            'base': 1132,
             'flavor': 972,
             'seibun': 216,
             'other': 972,
-            'send_price': 520,
+            'send_price': 0,
         }
     
     def get(self, request, *args, **kwargs):
@@ -246,12 +247,44 @@ class BaseInsertData(generic.TemplateView):
             request.session.clear()
             user = authenticate(email=user_data['email'], password=user_data['password'])
             if user is not None:
-                login(request, user)
-            return redirect('papps:basemypage', pk=uq.pk)
+                return redirect('papps:basepayorder', token=dumps(uq.pk))
+            else:
+                return redirect('papps:baseindex')
         else:
             request.session.clear()
             return redirect('papps:baseindex')
 
+''' 支払情報登録 '''
+class BasePayOrder(generic.TemplateView):
+    template_name = 'papps/payorder.html'
+    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        token = kwargs.get('token')
+        try:
+            user_pk = loads(token, max_age=self.timeout_seconds)
+
+        # 期限切れ
+        except SignatureExpired:
+            return HttpResponseBadRequest()
+
+        # tokenが間違っている
+        except BadSignature:
+            return HttpResponseBadRequest()
+
+        # tokenは問題なし
+        else:
+            try:
+                user = User.objects.get(pk=user_pk)
+            except User.DoesNotExist:
+                return HttpResponseBadRequest()
+            else:
+                oq = Order.objects.get(user_id=user_pk)
+                ctx['sougaku'] = oq.sougaku.replace('円', '')
+                ctx['zeikomi'] = oq.zeikomi.replace('円', '')
+        return ctx
+                
 
 ''' マイページ '''
 class BaseMyPage(OnlyYouMixin, generic.TemplateView):
@@ -275,6 +308,7 @@ class BaseMyPage(OnlyYouMixin, generic.TemplateView):
             ctx['flavor'] = '' if order_data.flavor is None else order_data.flavor
             ctx['seibun'] = '' if order_data.seibun is None else order_data.seibun
             ctx['other'] = '' if order_data.other is None else order_data.other
+            ctx['sougaku'] = order_data.sougaku
 
             iad_data = {}
             for obj in raw_queryset_normal(Order.select_inputadddata(self.kwargs['pk'])):
@@ -496,6 +530,33 @@ class PasswordChangeDone(PasswordChangeDoneView):
     def get(self, request, **kwargs):
         logout(request)
         return super().get(request, **kwargs)
+
+
+class PasswordReset(PasswordResetView):
+    """パスワード変更用URLの送付ページ"""
+    subject_template_name = 'papps/mail_template/password_reset/subject.txt'
+    email_template_name = 'papps/mail_template/password_reset/message.txt'
+    template_name = 'papps/password_reset_form.html'
+    form_class = MyPasswordResetForm
+    success_url = reverse_lazy('papps:basepasswordresetdone')
+
+
+class PasswordResetDone(PasswordResetDoneView):
+    """パスワード変更用URLを送りましたページ"""
+    template_name = 'papps/password_reset_done.html'
+
+
+class PasswordResetConfirm(PasswordResetConfirmView):
+    """新パスワード入力ページ"""
+    form_class = MySetPasswordForm
+    success_url = reverse_lazy('papps:basepasswordresetcomplete')
+    template_name = 'papps/password_reset_confirm.html'
+
+
+class PasswordResetComplete(PasswordResetCompleteView):
+    """新パスワード設定しましたページ"""
+    template_name = 'papps/password_reset_complete.html'
+
 
 class BaseIndex(generic.TemplateView):
     template_name = 'papps/index.html'

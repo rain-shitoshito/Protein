@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '<シークレットキーはあかん>'
+SECRET_KEY = 'd0)w$ih246ef$z879nplwkj8(2anyeoh6=c!$=4@(q^_@9v-%6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -134,3 +134,10 @@ AUTH_USER_MODEL = 'papps.User'
 LOGIN_URL = 'papps:baselogin'
 LOGIN_REDIRECT_URL = 'papps:baseindex'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.googlemail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = '******'
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL_HOST_PASSWORD = ''******'

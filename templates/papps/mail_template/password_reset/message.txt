@@ -1,0 +1,12 @@
+{{ user.sei_name }} {{ user.mei_name }} 様
+
+いつもご購入ありがとうございます。
+下記URLよりサイトにアクセスの上、パスワードの再設定を行ってください。
+
+再設定用URL
+{{ protocol}}://{{ domain }}{% url 'papps:basepasswordresetconfirm' uid token %}
+
+********************************************
+マイパーフェクトプロテイン
+https://myperfectprotein.jp
+********************************************

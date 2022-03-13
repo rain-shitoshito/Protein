@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div id="container">
+<div align="center">
+    <h2 style="text-align:center;">お支払い情報登録</h2>
+<div style="max-width:1240px">
+<FORM ACTION="https://credit.j-payment.co.jp/link/creditcard "METHOD="POST">
+    <INPUT TYPE="HIDDEN"NAME="aid" VALUE="122282">
+    <INPUT TYPE="HIDDEN" NAME="am" VALUE="{{ sougaku }}">
+    <INPUT TYPE="HIDDEN" NAME="sf" VALUE="{{ sougaku }}">
+    <INPUT TYPE="HIDDEN" NAME="tx" VALUE="0">
+    <INPUT TYPE="HIDDEN" NAME="jb" VALUE="CAPTURE">
+    <INPUT TYPE="HIDDEN"NAME="acam" VALUE="{{ zeikomi }}">
+    <INPUT TYPE="HIDDEN"NAME="actx" VALUE="{{ zeikomi }}">
+    <INPUT TYPE="HIDDEN"NAME="acsf" VALUE="0">
+    <INPUT TYPE="HIDDEN"NAME="actp" VALUE="4">
+    <INPUT TYPE="HIDDEN"NAME="inm" VALUE="My Perfect Protein">
+    <INPUT TYPE="HIDDEN"NAME="iid2" VALUE="1">
+    <INPUT TYPE="submit"NAME="submit" VALUE="購入">
+    </FORM>
+</div>
+<br><br><br>
+{% include 'papps/footer.html' %}
+{% endblock %}

@@ -46,6 +46,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     tel_bangou = models.CharField(_('電話番号'), max_length=11)
     email = models.EmailField(_('メールアドレス'), unique=True)
 
+    is_active = models.BooleanField(
+        _('有効フラグ'),
+        default=True,
+        help_text=_(
+            ''),
+    )
     is_superuser = models.BooleanField(
         _('権限フラグ'),
         default=False,

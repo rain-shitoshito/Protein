@@ -25,6 +25,23 @@ class MyPasswordChangeForm(PasswordChangeForm):
         for field in self.fields.values():
             field.widget.attrs['class'] = 'input_1'
 
+"""パスワード忘れたときのフォーム"""
+class MyPasswordResetForm(PasswordResetForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'input_1'
+
+
+"""パスワード再設定用フォーム(パスワード忘れて再設定)"""
+class MySetPasswordForm(SetPasswordForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'input_1'
+
 ''' Order2 '''
 class UserCreateForm(forms.ModelForm):
 
