@@ -48,7 +48,7 @@
 		<tr><td bgcolor="#dcdcdc" align="left" height="30">
 		&nbsp;&nbsp;&nbsp;お支払い方法&nbsp;&nbsp;&nbsp;
 		</td>
-	<td><a href="">変更はコチラから</a>
+	<td><a href="{% url 'papps:basepayorderchange' pk=user_id %}">変更はコチラから</a>
 		</td></tr>
 
 		
@@ -85,8 +85,14 @@
 	
 		<tr>
 	<td bgcolor="#dcdcdc" height="30">
-		&nbsp;&nbsp;&nbsp;総額</td>
+		&nbsp;&nbsp;&nbsp;金額（税込)</td>
 	<td>{{ sougaku }}
+		</td></tr>
+
+		<tr>
+	<td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;注文内容の変更</td>
+	<td><a href="{% url 'papps:baserefull' pk=user.pk %}">変更はコチラから</a>
 		</td></tr>
 
 			

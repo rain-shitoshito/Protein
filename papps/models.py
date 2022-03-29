@@ -76,6 +76,27 @@ class User(AbstractBaseUser, PermissionsMixin):
     def send_email(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
+    @staticmethod
+    def select_normaluserdata():
+        return User.objects.raw('''
+            SELECT
+            puser.id,
+            email,
+            naiyou,
+            base,
+            flavor,
+            seibun,
+            other,
+            yubin_bangou,
+            jusyo,
+            tel_bangou,
+            sei_name||mei_name AS name,
+            sougaku
+            FROM
+            papps_user AS puser
+            INNER JOIN papps_order AS porder ON puser.id = porder.user_id
+        ''')
+
 
 ''' オーダーモデル '''
 class Order(models.Model):
@@ -107,7 +128,8 @@ class Order(models.Model):
             INNER JOIN papps_inputadddata AS inputadddata ON porder.id = inputadddata.order_id
             INNER JOIN papps_inputadd AS inputadd ON inputadddata.inputadd_id = inputadd.id
         ''', [uid])
-    
+
+
 
 ''' インプットモデル '''
 class InputAdd(models.Model):

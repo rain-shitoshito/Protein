@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div id="container">
+<div align="center">
+
+    <br><br>
+	<img src="/static/image/ordercheck/order1.png" width="900" alt=""/>
+	<br><br>
+	
+		
+	
+	
+	<br><br>
+
+	<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
+	<tr><td bgcolor="#dcdcdc" height="30" width="250">
+		&nbsp;&nbsp;&nbsp;注文内容
+		</td>
+		
+	<td width="400">
+		{{ naiyou }}
+		</td></tr>
+		
+		<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;プロテインベース
+		</td>
+		
+	<td>{{ base }}</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;フレーバー
+		</td>
+	<td>{{ flavor }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;栄養成分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</td>
+	<td>{{ seibun }}
+		</td></tr>
+	<tr><td bgcolor="#dcdcdc" height="30">
+		&nbsp;&nbsp;&nbsp;【オプション】その他
+		</td>
+	<td>{{ other }}
+		</td></tr>
+	
+		<tr><td align="right" height="30">
+		小計&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right">{{ syoukei }}円
+		</td></tr>
+	<tr><td align="right" height="30">
+		消費税&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right">{{ zei }}円
+		</td></tr>
+	<tr><td align="right" height="30">
+		税込&nbsp;&nbsp;&nbsp;
+		</td>
+		<td align="right" height="30">{{ zeikomi }}円
+			</td></tr>
+			<tr><td align="right" height="30">
+		送料&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right" height="30">0円
+		</td></tr>
+			<tr><td align="right" height="30">
+		お支払い総額&nbsp;&nbsp;&nbsp;
+		</td>
+	<td align="right" height="30">{{ sougaku }}円
+		</td></tr>
+
+		
+		
+		
+	</table>
+	
+	
+	
+	
+	
+	
+	<br><br>
+	
+	<table><tr>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">&nbsp;
+		</td>
+		<td width="200">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="naiyou" value="{{ naiyou }}">
+            <input type="hidden" name="base" value="{{ base }}">
+            <input type="hidden" name="seibun" value="{{ seibun }}">
+            <input type="hidden" name="flavor" value="{{ flavor }}">
+            <input type="hidden" name="other" value="{{ other }}">
+            <input type="hidden" name="syoukei" value="{{ syoukei }}">
+            <input type="hidden" name="zei" value="{{ zei }}">
+            <input type="hidden" name="zeikomi" value="{{ zeikomi }}">
+            <input type="hidden" name="sougaku" value="{{ sougaku }}">
+
+            <button><img src="/static/image/ordercheck/ordernext.png" width="200"></button>
+        </form>
+
+		</tr></table>
+	
+	
+	<br><br><br>
+	{% include 'papps/footer.html' %}
+	{% endblock %}

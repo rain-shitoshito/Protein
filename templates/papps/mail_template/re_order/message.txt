@@ -1,0 +1,29 @@
+{{ name }}様より注文内容変更のお知らせが届いています。
+
+■ユーザ情報
+名前: {{ name }}
+Email: {{ email }}
+ユーザID: {{ id }}
+
+■変更内容
+注文内容: {{ naiyou }}
+プロテインベース: {{ base }}
+フレーバー: {{ flavor }}
+栄養成分: {{ seibun }}
+オプション: {{ other }}
+小計: {{ syoukei }}
+消費税: {{ zei }}
+税込: {{ zeikomi }}
+送料: 0
+お支払い総額: {{ sougaku }}
+
+
+---------------------------
+
+My Perfect Protein事務局
+
+https://myperfectprotein.jp
+
+myperfectprotein@gmail.com
+
+---------------------------

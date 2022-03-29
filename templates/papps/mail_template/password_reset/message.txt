@@ -6,7 +6,12 @@
 再設定用URL
 {{ protocol}}://{{ domain }}{% url 'papps:basepasswordresetconfirm' uid token %}
 
-********************************************
-マイパーフェクトプロテイン
+---------------------------
+
+My Perfect Protein事務局
+
 https://myperfectprotein.jp
-********************************************
+
+myperfectprotein@gmail.com
+
+---------------------------

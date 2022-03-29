@@ -9,12 +9,36 @@
 	{% include 'papps/auth.html' %}	<br>
 
 	<h2>一般ユーザ一覧</h2>
-	{% if users_cnt != 0 %}
+	{% if data != 0 %}
 		<table border="1" style="border: 1px solid black; border-collapse: collapse;" bordercolor="#000000">
-			{% for q in users %}
+			<tr>
+				<th>メールアドレス</th>
+				<th>登録番号</th>
+				<th>注文内容</th>
+				<th>プロテインベース</th>
+				<th>フレーバー</th>
+				<th>栄養成分</th>
+				<th>オプション</th>
+				<th>郵便番号</th>
+				<th>住所</th>
+				<th>電話番号</th>
+				<th>名前</th>
+				<th>総額</th>
+			</tr>
+			{% for q in data %}
 				<tr>
-					<td style="width:250px;background-color:#dcdcdc;">{{ q.email }}</td>
-					<td style="width:500px">{{ q.id }}</td>
+					<td>{{ q.email }}</td>
+					<td>{{ q.id }}</td>
+					<td>{{ q.naiyou }}</td>
+					<td>{{ q.base }}</td>
+					<td>{{ q.flavor }}</td>
+					<td>{{ q.seibun }}</td>
+					<td>{{ q.other }}</td>
+					<td>{{ q.yubin_bangou }}</td>
+					<td>{{ q.jusyo }}</td>
+					<td>{{ q.tel_bangou }}</td>
+					<td>{{ q.name }}</td>
+					<td>{{ q.sougaku }}</td>
 				</tr>
 			{% endfor %}
 		</table>

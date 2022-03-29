@@ -13,6 +13,7 @@
 	<span id="tm_base" data-inp="{{ base }}"></span>
 	<span id="tm_seibun" data-inp="{{ seibun }}"></span>
 	<span id="tm_flavor" data-inp=""></span>
+	<span id="tm_send_price" data-inp="102"></span>
 	<img src="/static/image/easy/choice.png" width="600" height="130" alt=""/><br><br>
 	
 	
@@ -43,9 +44,10 @@ let naiyou = document.getElementById("tm_naiyou").dataset.inp;
 let base = document.getElementById("tm_base").dataset.inp;
 let seibun = document.getElementById("tm_seibun").dataset.inp;
 let flavor = targetsa[ia].getAttribute("value");
+let send_price = document.getElementById("tm_send_price").dataset.inp;
 let tran = document.getElementById("tm_tran");
 let base_url = tran.dataset.bhref;
-let tran_url = `${base_url}?naiyou=${naiyou}&&base=${base}&&seibun=${seibun}&&flavor=${flavor}`;
+let tran_url = `${base_url}?naiyou=${naiyou}&&base=${base}&&seibun=${seibun}&&flavor=${flavor}&&send_price=${send_price}`;
 tran.setAttribute("href", tran_url);
 // リンク活性
 tran.classList.remove("link_negative");

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div id="container">
+<div align="center">
+    <h2 style="text-align:center;">お支払い情報変更</h2>
+<div style="max-width:1240px">
+<p>以下の送信ボタンを押すと、運営へ支払い情報変更の通知が届きます。<br>運営が確認後、ご登録いただいているメールアドレスへお支払い情報再登録用のURLを送信させていただきますので<br>
+そちらから再登録をお願いいたします。</p>
+<form method="POST">
+    {% csrf_token %}
+    <input name="dumps_id" type="hidden" value="{{ dumps_id }}">
+    <button>送信</button>
+</form>
+</div>
+<br><br><br>
+{% include 'papps/footer.html' %}
+{% endblock %}

@@ -1,0 +1,23 @@
+返信先: {{ email }}
+件名: My Perfect Protein
+---------------------------
+{{ name }}様
+
+いつもご利用ありがとうございます。
+
+お支払い情報は、下記のURLからお願いいたします。
+
+{{ protocol}}://{{ domain }}{% url 'papps:basepayorder' token=dumps_id %}
+
+
+どうぞよろしくお願いいたします。
+
+---------------------------
+
+My Perfect Protein事務局
+
+https://myperfectprotein.jp
+
+myperfectprotein@gmail.com
+
+---------------------------

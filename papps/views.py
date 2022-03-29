@@ -11,7 +11,9 @@ from django.contrib.auth.views import (
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 )
 from django.core.signing import BadSignature, SignatureExpired, loads, dumps
-from django.http import Http404
+from django.http import Http404, HttpResponseBadRequest
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 from .forms import *
 from .models import *
 
@@ -30,6 +32,7 @@ class OnlySuperMixin(UserPassesTestMixin):
     def test_func(self):
         user = self.request.user
         return user.is_superuser
+
 
 ''' Aiのフレーバー選択 '''
 ''' フレーバ選択 '''
@@ -83,12 +86,13 @@ class BaseOrder(generic.TemplateView):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        #税込みの金額
         self.prices = {
             'base': 1132,
             'flavor': 972,
             'seibun': 216,
             'other': 972,
-            'send_price': 0,
+            'send_price': 1,
         }
     
     def get(self, request, *args, **kwargs):
@@ -97,6 +101,7 @@ class BaseOrder(generic.TemplateView):
         self.flavor = request.GET.get('flavor')
         self.seibun = '' if request.GET.get('seibun') is None else request.GET.get('seibun')
         self.other = '' if request.GET.get('other') is None else request.GET.get('other')
+        self.tm_send_price = '' if request.GET.get('send_price') is None else request.GET.get('send_price')
         return super().get(request, *args, **kwargs)
 
     def calc_base(self):
@@ -128,19 +133,25 @@ class BaseOrder(generic.TemplateView):
                 return len(self.other.split('/')) * self.prices['other']
 
     def price_syoukei(self):
-        return self.calc_base() + self.calc_flavor() + self.calc_seibun() + self.calc_other()
+        return round(self.price_zeikomi() / 1.08)
 
     def price_zei(self):
-        return int(self.price_syoukei() * 0.1);
+        return round(self.price_syoukei() * 0.08);
 
     def price_zeikomi(self):
-        return self.price_syoukei() + self.price_zei()
+        return self.price_sougaku() + 2000
 
     def send_price(self):
-        return self.prices['send_price']
+        try:
+            add_price = round(int(self.tm_send_price) * self.prices['send_price'])
+            if add_price < 101:
+                raise Exception()
+            return add_price
+        except:
+            return 0
 
     def price_sougaku(self):
-        return self.price_zeikomi() + self.send_price()
+        return self.calc_base() + self.calc_flavor() + self.calc_seibun() + self.calc_other() + self.send_price()
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -149,12 +160,57 @@ class BaseOrder(generic.TemplateView):
         ctx['seibun'] = self.seibun
         ctx['flavor'] = self.flavor
         ctx['other'] = self.other
+        ctx['send_price'] = self.send_price()
         ctx['syoukei'] = self.price_syoukei()
         ctx['zei'] = self.price_zei()
         ctx['zeikomi'] = self.price_zeikomi()
-        ctx['send_price'] = self.send_price()
         ctx['sougaku'] = self.price_sougaku()
         return ctx
+
+
+''' 再オーダー '''
+class BaseReOrder(OnlyYouMixin, BaseOrder):
+    template_name = 'papps/reorder.html'
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        #2000引きは無し
+        self.prices['base'] = 3132
+
+    def get(self, request, *args, **kwargs):
+        self.naiyou = request.GET.get('naiyou')
+        self.base = request.GET.get('base')
+        self.flavor = request.GET.get('flavor')
+        self.seibun = '' if request.GET.get('seibun') is None else request.GET.get('seibun')
+        self.other = '' if request.GET.get('other') is None else request.GET.get('other')
+        return super().get(request, *args, **kwargs)
+
+    def price_zeikomi(self):
+        return self.price_sougaku()
+
+    def post(self, request, *args, **kwargs):
+        ctx = {
+            'name': request.user.sei_name + request.user.mei_name,
+            'id': request.user.id,
+            'email': request.user.email,
+            'naiyou': request.POST.get('naiyou'),
+            'base': request.POST.get('base'),
+            'seibun': request.POST.get('seibun'),
+            'flavor': request.POST.get('flavor'),
+            'other': request.POST.get('other'),
+            'syoukei': request.POST.get('syoukei'),
+            'zei': request.POST.get('zei'),
+            'zeikomi': request.POST.get('zeikomi'),
+            'sougaku': request.POST.get('sougaku'),
+        }
+        subject = render_to_string('papps/mail_template/re_order/subject.txt', ctx)
+        message = render_to_string('papps/mail_template/re_order/message.txt', ctx)
+        host_user = getattr(settings, 'EMAIL_HOST_USER', None)
+        send_mail(
+            subject, message, host_user, [host_user]
+        )
+        return redirect('papps:basereorderdone')
+
 
 ''' オーダー2 '''
 class BaseOrder2(FormView):
@@ -213,7 +269,7 @@ class BaseOrder3(generic.TemplateView):
             ctx['email'] = session['user_data']['email']
         return ctx
 
-''' マイページ '''
+
 class BaseInsertData(generic.TemplateView):
     form_class = UserCreateForm
     http_method_names = ['post']
@@ -284,7 +340,49 @@ class BasePayOrder(generic.TemplateView):
                 ctx['sougaku'] = oq.sougaku.replace('円', '')
                 ctx['zeikomi'] = oq.zeikomi.replace('円', '')
         return ctx
-                
+
+
+''' 支払情報変更 '''
+class BasePayOrderChange(OnlyYouMixin, generic.TemplateView):
+    template_name = 'papps/payorderchange.html'
+    timeout_seconds = getattr(settings, 'ACTIVATION_TIMEOUT_SECONDS', 60*60*24)
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['dumps_id'] = dumps(kwargs['pk'])
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        try:
+            user_pk = loads(request.POST.get('dumps_id'), max_age=self.timeout_seconds)
+
+        # 期限切れ
+        except SignatureExpired:
+            return HttpResponseBadRequest()
+
+        # tokenが間違っている
+        except BadSignature:
+            return HttpResponseBadRequest()
+
+        # tokenは問題なし
+        else:
+            uq = User.objects.get(pk=user_pk)
+            ctx = {
+                'protocol': request.scheme,
+                'domain': request.get_host(),
+                'name': uq.sei_name + uq.mei_name,
+                'email': uq.email,
+                'dumps_id': dumps(user_pk),
+            }
+            subject = render_to_string('papps/mail_template/pay_order_change/subject.txt', ctx)
+            message = render_to_string('papps/mail_template/pay_order_change/message.txt', ctx)
+            host_user = getattr(settings, 'EMAIL_HOST_USER', None)
+            send_mail(
+                subject, message, host_user, [host_user]
+            )
+            return redirect('papps:basepayorderchangedone')
+        
+
 
 ''' マイページ '''
 class BaseMyPage(OnlyYouMixin, generic.TemplateView):
@@ -298,6 +396,8 @@ class BaseMyPage(OnlyYouMixin, generic.TemplateView):
         if User.objects.filter(pk=kwargs['pk']).exists() and Order.objects.filter(user_id=kwargs['pk']).exists():
             user_data = User.objects.get(pk=kwargs['pk'])
             order_data = Order.objects.get(user_id=kwargs['pk'])
+            ctx['user_id'] = user_data.id
+            ctx['dumps_id'] = dumps(user_data.id)
             ctx['name'] = user_data.sei_name + user_data.mei_name
             ctx['yubin_bangou'] = user_data.yubin_bangou
             ctx['jusyo'] = user_data.jusyo
@@ -318,6 +418,7 @@ class BaseMyPage(OnlyYouMixin, generic.TemplateView):
         else:
             raise Http404('idと紐づくユーザが存在しません')
 
+
 ''' スーパーユーザーページ '''
 class BaseSuperUserPage(OnlySuperMixin, generic.TemplateView):
     template_name = 'papps/superuserpage.html'
@@ -330,8 +431,7 @@ class BaseNormalUserInfo(OnlySuperMixin, generic.TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         users = User.objects.filter(is_superuser=False)
-        ctx['users'] = users
-        ctx['users_cnt'] = len(users)
+        ctx['data'] = raw_queryset_normal(User.select_normaluserdata())
         return ctx
 
 
@@ -578,6 +678,16 @@ class BaseEasy(generic.TemplateView):
 
 class BaseFull(generic.TemplateView):
     template_name = 'papps/full.html'
+
+''' 再オーダー '''
+class BaseReFull(OnlyYouMixin, generic.TemplateView):
+    template_name = 'papps/refull.html'
+
+class BaseReOrderDone(generic.TemplateView):
+    template_name = 'papps/reorder_done.html'
+
+class BasePayOrderChangeDone(generic.TemplateView):
+    template_name = 'papps/payorder_done.html'
 
 class BaseGreen(generic.TemplateView):
     template_name = 'papps/green.html'
